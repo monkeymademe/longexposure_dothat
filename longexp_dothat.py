@@ -117,12 +117,14 @@ def takelongphoto():
     settings = (int(filenum), int(shutter))
     with picamera.PiCamera() as camera:
 	camera.resoluion = (1024, 768)
+	camera.hflip = True
+	camera.vflip = True
 	camera.framerate = Fraction(1, 6)
 	camera.shutter_speed = settings[1]
 	camera.expodure_mode = 'off'
 	camera.iso = 100
 	sleep(10)
-	camera.capture('/home/pi/longexp_{}.jpg'.format(int(settings[0])))
+	camera.capture('/home/pi/photo/longexp_{}.jpg'.format(int(settings[0])))
     print("DONE!")
     l.clear()
     b.rgb(0, 255, 255)
