@@ -23,4 +23,4 @@ Cancel (or the 3 arrows pointing left) - Take the shot
 * Take a normal preview
 * Some how deliver pictures to a medium where the user can see it (including test shot)
 * Auto increment file names even after reboot
-* Time lapse feature - MUCH LATER!increment
+* Time lapse feature - MUCH LATER!
