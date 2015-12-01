@@ -1,4 +1,4 @@
-# longexposure_dothat
+# Long Exposure Using dothat
 
 Short note on what this is... Working on making a menu system for the Display-o-Tron Hat and Raspberry Pi Camera so you can configure making long exposures!
 
