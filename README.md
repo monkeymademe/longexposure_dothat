@@ -13,14 +13,14 @@ Cancel (or the 3 arrows pointing left) - Take the shot
 
 ## Issues
 
-*Code is mince
-*Needs a Real Menu
+* Code is mince
+* Needs a Real Menu
 
 ## Next Features
 
-*Build a real menu for making all the settings happen
-*Auto connect to a device (phone) for network control
-*Take a normal preview
-*Some how deliver pictures to a medium where the user can see it (including test shot)
-*Auto increment file names even after reboot
-*Time lapse feature - MUCH LATER!increment
+* Build a real menu for making all the settings happen
+* Auto connect to a device (phone) for network control
+* Take a normal preview
+* Some how deliver pictures to a medium where the user can see it (including test shot)
+* Auto increment file names even after reboot
+* Time lapse feature - MUCH LATER!increment
