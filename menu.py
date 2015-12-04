@@ -20,9 +20,9 @@ from plugins.wlan import Wlan
 from plugins.text import Text
 from plugins.camera import takeshot
 from plugins.camera import ISO
+from plugins.camera import Camerasettings
 
 import time
-
 
 class SpaceInvader(MenuOption):
     """
@@ -60,15 +60,17 @@ See GraphTemp, GraphCPU, Contrast and Backlight for examples.
 """
 my_invader = SpaceInvader()
 
+settings = Camerasettings()
+
 menu = Menu(
     structure={
-        'Test': takeshot(),
+        'Test': takeshot(settings),
         'Current Time': Clock(backlight),
         'Camera status': {
             'IP': IPAddress()
         },
 	'Camera settings': {
-	    'ISO': ISO()
+	    'ISO': ISO(settings)
 	},
         'Settings': {
 	    'WiFi Setup': Wlan(),

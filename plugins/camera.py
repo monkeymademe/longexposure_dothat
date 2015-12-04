@@ -7,16 +7,24 @@ import picamera
 from time import sleep
 from fractions import Fraction
 
+class Camerasettings():
+    def __init__(self):
+	self.iso = 0
+
 class takeshot(MenuOption):
 
-    def __init__(self):
+    def __init__(self, settings):
         MenuOption.__init__(self)
+	self.settings=settings
 	self.mode = 0
-        self.current_iso = 0     
+	self.current_iso = 0    
 
     def setup(self, config):
         self.config = config
-	self.current_iso = int(self.get_option('Camera', 'iso', 0))
+	#i = ISO()
+
+    def begin(self):
+	self.current_iso = self.settings.iso
 
     def takephoto(self):
 	self.mode = 1
@@ -51,30 +59,36 @@ class takeshot(MenuOption):
         menu.clear_row
         """
     def left(self):
-	self.mode = 0
-	return False
+	if self.mode == 0:
+		return False
+	else:
+		return True
 
     def select(self):
 	if self.mode == 0:
         	self.takephoto()
 	else: 
-		self.left()
+		self.mode = 0
+		return True
 
-§
+
 class ISO(MenuOption):
     """
     When the menu is redrawn, it calls your plugins
     redraw method and passes an instance of itself.
     """
-    def __init__(self):
+    def __init__(self, setting):
 	MenuOption.__init__(self)
-	self.current_iso = 0
+	self.iso=setting
+	self.iso.iso = 0
 	self.display_iso = 0
+	self.current_iso = 0
 
     def setup(self, config):
 	self.config = config
 	self.current_iso = int(self.get_option('Camera', 'iso', 0))
 	self.display_iso = self.current_iso
+	self.iso.iso = self.current_iso
 
     def increase_iso(self):
 	if self.display_iso == 800:
@@ -93,7 +107,12 @@ class ISO(MenuOption):
     def set_iso(self):
 	self.set_option('Camera', 'iso', str(self.display_iso))
 	#update current
-	self.current_iso = int(self.get_option('Camera', 'iso', 0))	
+	self.current_iso = int(self.get_option('Camera', 'iso', 0))
+	self.iso.iso = self.current_iso
+	#self.get_iso()
+
+    #def get_iso(self):
+ #	return self.current_iso
 
     def redraw(self, menu):
         menu.write_row(0, 'Select ISO')
