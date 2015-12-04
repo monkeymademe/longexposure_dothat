@@ -3,10 +3,65 @@
 Every dot3k.menu plugin is derived from MenuOption
 """
 from dot3k.menu import MenuOption
+import picamera
+from time import sleep
+from fractions import Fraction
 
+class takeshot(MenuOption):
 
+    def __init__(self):
+        MenuOption.__init__(self)
+	self.mode = 0
+        self.current_iso = 0     
 
-class HelloWorld(MenuOption):
+    def setup(self, config):
+        self.config = config
+	self.current_iso = int(self.get_option('Camera', 'iso', 0))
+
+    def takephoto(self):
+	self.mode = 1
+    	with picamera.PiCamera() as camera:
+		camera.resoluion = (1024, 768)
+		camera.hflip = True
+		camera.vflip = True
+		#camera.framerate = Fraction(1, 6)
+		camera.expodure_mode = 'off'
+		camera.iso = int(self.current_iso)
+		sleep(10)
+		camera.capture('/home/pi/test.jpg')
+    	print("DONE!")
+	self.mode = 2
+
+    def redraw(self, menu):
+	if self.mode == 0:
+		menu.write_row(0, 'Confirm')
+                menu.write_row(1, 'ISO:' + str(self.current_iso))
+                menu.clear_row(2)
+	elif self.mode == 1:
+		menu.write_row(0, 'Snap Snap')
+        	menu.clear_row(1)
+        	menu.clear_row(2)
+        elif self.mode == 2:
+		menu.write_row(0, 'DONE')
+                menu.clear_row(1)
+                menu.clear_row(2)
+
+        """
+        If you're not going to use a row, you should clear it!
+        menu.clear_row
+        """
+    def left(self):
+	self.mode = 0
+	return False
+
+    def select(self):
+	if self.mode == 0:
+        	self.takephoto()
+	else: 
+		self.left()
+
+§
+class ISO(MenuOption):
     """
     When the menu is redrawn, it calls your plugins
     redraw method and passes an instance of itself.

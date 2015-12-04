@@ -18,7 +18,8 @@ from plugins.graph import IPAddress, GraphTemp, GraphCPU, GraphNetSpeed
 from plugins.clock import Clock
 from plugins.wlan import Wlan
 from plugins.text import Text
-from plugins.camera import HelloWorld
+from plugins.camera import takeshot
+from plugins.camera import ISO
 
 import time
 
@@ -61,11 +62,14 @@ my_invader = SpaceInvader()
 
 menu = Menu(
     structure={
-        'Test': HelloWorld(),
+        'Test': takeshot(),
         'Current Time': Clock(backlight),
         'Camera status': {
             'IP': IPAddress()
         },
+	'Camera settings': {
+	    'ISO': ISO()
+	},
         'Settings': {
 	    'WiFi Setup': Wlan(),
             'Display': {
