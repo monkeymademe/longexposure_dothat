@@ -18,8 +18,8 @@ from plugins.graph import IPAddress, GraphTemp, GraphCPU, GraphNetSpeed
 from plugins.clock import Clock
 from plugins.wlan import Wlan
 from plugins.text import Text
-from plugins.camera import takeshot
-from plugins.camera import ISO
+from plugins.camera import takeshot 
+from plugins.camera import ISO, Hflip, Vflip
 from plugins.camera import Camerasettings
 
 import time
@@ -64,13 +64,16 @@ settings = Camerasettings()
 
 menu = Menu(
     structure={
-        'Test': takeshot(settings),
+        'Take Picture': takeshot(settings),
         'Current Time': Clock(backlight),
         'Camera status': {
             'IP': IPAddress()
         },
 	'Camera settings': {
-	    'ISO': ISO(settings)
+	    'ISO': ISO(settings),
+	    'Orientation': {
+		'Horizontal Flip': Hflip(settings),
+		'Vertical Flip': Vflip(settings)}
 	},
         'Settings': {
 	    'WiFi Setup': Wlan(),
